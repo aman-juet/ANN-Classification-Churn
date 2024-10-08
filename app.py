@@ -23,7 +23,7 @@ with open('Scaler.pkl', 'rb') as file:
 st.title('Customer Churn Prediction')
 
 # User input
-geography = st.selectbox('Geography', onehot_encoder_geo.categories_[0])
+geography = st.selectbox('Geography', Onehot_encoder_geo.categories_[0])
 gender = st.selectbox('Gender', label_encoder_gender.classes_)
 age = st.slider('Age', 18, 92)
 balance = st.number_input('Balance')
@@ -49,14 +49,14 @@ input_data = pd.DataFrame({
 
 
 # One-hot encode 'Geography'
-geo_encoded = onehot_encoder_geo.transform([[geography]]).toarray()
-geo_encoded_df = pd.DataFrame(geo_encoded, columns=onehot_encoder_geo.get_feature_names_out(['Geography']))
+geo_encoded = Onehot_encoder_geo.transform([[geography]]).toarray()
+geo_encoded_df = pd.DataFrame(geo_encoded, columns=Onehot_encoder_geo.get_feature_names_out(['Geography']))
 
 # Combine one-hot encoded columns with input data
 input_data = pd.concat([input_data.reset_index(drop=True), geo_encoded_df], axis=1)
 
 # Scale the input data
-input_data_scaled = scaler.transform(input_data)
+input_data_scaled = Scaler.transform(input_data)
 
 
 # Predict churn
